@@ -17,7 +17,7 @@ fetch('http://localhost:3000/api/users')
         <td>${u.phone}</td>
         <td>
             <i class="material-icons edit" data-toggle="tooltip" title="Edit"></i>
-            <i class="material-icons delete" title="Delete" data-toggle="modal" data-target="#deleteEmployee"></i>
+            <i class="material-icons delete" title="Delete" data-toggle="modal" data-target="#deleteEmployee" onclick=eliminar(${u.id})></i>
         </td>
     </tr>`
     });
@@ -27,7 +27,7 @@ fetch('http://localhost:3000/api/users')
 //     const iconoEliminar = document.querySelector('tr i.delete').parentNode.parentNode.id;
 //    console.log(iconoEliminar);
    
-    document.getElementById('deleteButton').onclick = eliminar;
+    //document.getElementById('deleteButton').onclick = eliminar;
 
 })
 
@@ -41,9 +41,11 @@ fetch('http://localhost:3000/api/users')
 // }  
 
 
-function eliminar(e) {
+function eliminar(id) {
     // const id = e.target.parentNode.parentNode.id;
-    const id = document.querySelector('tr i.delete').parentNode.parentNode.id;
+    //const id = document.querySelector('tr i.delete').parentNode.parentNode.id;
+    console.log("el id es el ", id);
+    
   
     fetch(`http://localhost:3000/api/users/${id}`, { method: 'delete' })
       .then(res => {
