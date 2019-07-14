@@ -25,11 +25,8 @@ fetch('http://localhost:3000/api/users')
     document.querySelector('tbody').innerHTML = tableRows.join('');
 
 //     const iconoEliminar = document.querySelector('tr i.delete').parentNode.parentNode.id;
-//     // const averrr =  iconoEliminar.parentNode.parentNode.id;
 //    console.log(iconoEliminar);
    
-    
-    // .onclick = eliminar;
     document.getElementById('deleteButton').onclick = eliminar;
 
 })
