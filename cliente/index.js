@@ -24,11 +24,6 @@ fetch('http://localhost:3000/api/users')
 
     document.querySelector('tbody').innerHTML = tableRows.join('');
 
-//     const iconoEliminar = document.querySelector('tr i.delete').parentNode.parentNode.id;
-//    console.log(iconoEliminar);
-   
-    //document.getElementById('deleteButton').onclick = eliminar;
-
 })
 
 
@@ -42,14 +37,13 @@ fetch('http://localhost:3000/api/users')
 
 
 function eliminar(id) {
-    // const id = e.target.parentNode.parentNode.id;
-    //const id = document.querySelector('tr i.delete').parentNode.parentNode.id;
-    console.log("el id es el ", id);
     
+    document.getElementById('deleteButton').onclick = function eliminarDefinitivo(){
+        fetch(`http://localhost:3000/api/users/${id}`, { method: 'delete' })
+        .then(res => {
+          document.getElementById(id).remove();
+        });
+    };
   
-    fetch(`http://localhost:3000/api/users/${id}`, { method: 'delete' })
-      .then(res => {
-        document.getElementById(id).remove();
-      });
   }
   
