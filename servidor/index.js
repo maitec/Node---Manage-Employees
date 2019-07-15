@@ -28,7 +28,7 @@ app.put('/api/users/:id', function (req, res) {
     const usuarioEditado = req.body;
     console.log(req.body)
     usuarios.forEach(usuario => {
-        if (usuario.id === id) {
+        if (usuario.id == id) {
             usuario.name = usuarioEditado.name;
             usuario.email = usuarioEditado.email;
             usuario.address = usuarioEditado.address;

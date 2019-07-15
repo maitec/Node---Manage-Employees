@@ -49,7 +49,9 @@ function editar(id) {
                     editAddress.value = registro.address;
                     editPhone.value = registro.phone;
                 }
-                document.getElementById('saveButton').onclick = function editarDefinitivo() {
+                document.getElementById('saveButton').onclick = function editarDefinitivo(e) {
+                    //e.preventDefault()
+
                     const usuarioEditado = {
                         name: editName.value,
                         email: editEmail.value,
@@ -66,12 +68,7 @@ function editar(id) {
                         }
                     })
                         .then(res => res.json())
-                        .then(data => {
-                            console.log(data)
-                            const elementoEditado = document.getElementById('id');
-                            console.log("el elemeto editado es ", elementoEditado );
-                            
-                        })
+
                 }
             })
         })
