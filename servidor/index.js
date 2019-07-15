@@ -22,7 +22,7 @@ app.get('/api/users', function (req, res) {
     res.json(usuarios);
 })
 
-app.put('api/users/:id', function (req, res) {
+app.put('/api/users/:id', function (req, res) {
     const id = req.params.id;
     console.log("el id es ", id);
     const usuarioEditado = req.body;

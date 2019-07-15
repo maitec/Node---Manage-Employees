@@ -69,7 +69,7 @@ function editar(id) {
                         .then(data => {
                             console.log(data)
                             const elementoEditado = document.getElementById('id');
-                            console.log("el elemeto editado es ",elementoEditado );
+                            console.log("el elemeto editado es ", elementoEditado );
                             
                         })
                 }
