@@ -68,7 +68,9 @@ function editar(id) {
                         }
                     })
                         .then(res => res.json())
-
+                        .then(data => {
+                             
+                        })
                 }
             })
         })
