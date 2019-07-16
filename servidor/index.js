@@ -13,9 +13,6 @@ const usuarios = [
     { id: 3, name: "Bruce Wayne 3", email: "bruce@wayneenterpreises.com", address: "Gotham City", phone: 08009991111 },
     { id: 4, name: "Bruce Wayne 4", email: "bruce@wayneenterpreises.com", address: "Gotham City", phone: 08009991111 },
     { id: 5, name: "Bruce Wayne 5", email: "bruce@wayneenterpreises.com", address: "Gotham City", phone: 08009991111 },
-    { id: 6, name: "Bruce Wayne 6", email: "bruce@wayneenterpreises.com", address: "Gotham City", phone: 08009991111 },
-    { id: 7, name: "Bruce Wayne 7", email: "bruce@wayneenterpreises.com", address: "Gotham City", phone: 08009991111 },
-    { id: 8, name: "Bruce Wayne 8", email: "bruce@wayneenterpreises.com", address: "Gotham City", phone: 08009991111 }
 ];
 
 let ID = 9;

@@ -1,6 +1,5 @@
 let tableRows = [];
 
-const form = document.querySelector("form");
 const name = document.getElementById('name');
 const email = document.getElementById('email');
 const address = document.getElementById('address');
@@ -49,15 +48,6 @@ fetch('http://localhost:3000/api/users')
         }
     })
 
-
-// form.onsubmit = function(event){
-//     event.preventDefault();
-
-//     if(name.value.length > 30){
-//         name.classList.add("error")
-//     }
-// }  
-
 function editar(id) {
     fetch(`http://localhost:3000/api/users`)
         .then(res => res.json())
@@ -95,7 +85,6 @@ function editar(id) {
             })
         })
 }
-
 
 function eliminar(id) {
 
