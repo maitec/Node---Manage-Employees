@@ -18,8 +18,17 @@ const usuarios = [
     { id: 8, name: "Bruce Wayne 8", email: "bruce@wayneenterpreises.com", address: "Gotham City", phone: 08009991111 }
 ];
 
+let ID = 9;
+
 app.get('/api/users', function (req, res) {
     res.json(usuarios);
+})
+
+app.post('/api/users', function (req,res) {
+    const nuevoUsuario = req.body;
+    nuevoUsuario.id = ID++;
+    usuarios.push(nuevoUsuario);
+    res.json(nuevoUsuario)
 })
 
 app.put('/api/users/:id', function (req, res) {
@@ -48,9 +57,6 @@ app.delete('/api/users/:id', function (req, res) {
     }
     res.json(usuarios);
 })
-
-
-
 
 
 app.listen(3000);

@@ -1,7 +1,10 @@
 let tableRows = [];
 
-
 const form = document.querySelector("form");
+const name = document.getElementById('name');
+const email = document.getElementById('email');
+const address = document.getElementById('address');
+const phone = document.getElementById('phone');
 const editName = document.getElementById('editName');
 const editEmail = document.getElementById('editEmail');
 const editAddress = document.getElementById('editAddress');
@@ -26,6 +29,24 @@ fetch('http://localhost:3000/api/users')
         });
 
         document.querySelector('tbody').innerHTML = tableRows.join('');
+
+        document.getElementById('addButton').onclick = function agregar() {
+
+            const nuevoUsuario = {
+                name: name.value,
+                email: email.value,
+                address: address.value,
+                phone: phone.value
+            }
+
+            fetch('http://localhost:3000/api/users', {
+                method: 'POST',
+                body: JSON.stringify(nuevoUsuario),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+        }
     })
 
 
@@ -58,7 +79,6 @@ function editar(id) {
                         address: editAddress.value,
                         phone: editPhone.value
                     }
-                    //console.log("el nombre editado es ", usuarioEditado);
 
                     fetch(`http://localhost:3000/api/users/${id}`, {
                         method: 'put',
@@ -69,7 +89,7 @@ function editar(id) {
                     })
                         .then(res => res.json())
                         .then(data => {
-                             
+
                         })
                 }
             })
