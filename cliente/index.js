@@ -8,6 +8,7 @@ const editName = document.getElementById('editName');
 const editEmail = document.getElementById('editEmail');
 const editAddress = document.getElementById('editAddress');
 const editPhone = document.getElementById('editPhone');
+const filtro = document.getElementById('search');
 
 fetch('http://localhost:3000/api/users')
     .then(res => res.json())
@@ -47,6 +48,18 @@ fetch('http://localhost:3000/api/users')
             })
         }
     })
+
+filtro.addEventListener('keypress', function (event){
+    if(event.keyCode === 13){
+        let textoBusqueda = filtro.value;
+        console.log(textoBusqueda)
+        fetch(`http://localhost:3000/api/users?search=${textoBusqueda}`)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
+    }
+})
 
 function editar(id) {
     fetch(`http://localhost:3000/api/users`)

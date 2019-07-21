@@ -8,11 +8,10 @@ app.use(cors());
 app.use(express.json());
 
 const usuarios = [
-    { id: 1, name: "Bruce Wayne 1", email: "bruce@wayneenterpreises.com", address: "Gotham City", phone: 08009991111 },
-    { id: 2, name: "Bruce Wayne 2", email: "bruce@wayneenterpreises.com", address: "Gotham City", phone: 08009991111 },
-    { id: 3, name: "Bruce Wayne 3", email: "bruce@wayneenterpreises.com", address: "Gotham City", phone: 08009991111 },
-    { id: 4, name: "Bruce Wayne 4", email: "bruce@wayneenterpreises.com", address: "Gotham City", phone: 08009991111 },
-    { id: 5, name: "Bruce Wayne 5", email: "bruce@wayneenterpreises.com", address: "Gotham City", phone: 08009991111 },
+    { id: 1, name: "Bruce Wayne", email: "bruce@wayneenterpreises.com", address: "Gotham City", phone: 08009991111 },
+    { id: 2, name: "Katniss Everdeen", email: "mockingjay@hotmail.com", address: "District 12", phone: 72536394 },
+    { id: 3, name: "Hermione Granger", email: "hgranger@gmail.com", address: "Hogwarts", phone: 45885767 },
+    { id: 4, name: "Frodo Bolson", email: "frodo@hobbit.com", address: "Hobbiton", phone: 928755556 },
 ];
 
 let ID = 9;
@@ -28,11 +27,32 @@ app.post('/api/users', function (req,res) {
     res.json(nuevoUsuario)
 })
 
+app.get('/api/users', function(req, res){
+    let busqueda = req.query.search;
+    let usuariosFiltrados = [];
+    function filtrarbusqueda (busq){
+        usuarios.forEach(usuario => {
+            if(usuario.name.includes(busq)){
+                usuariosFiltrados.push(usuario)
+            }else if(usuario.email.includes(busq)){
+                usuariosFiltrados.push(usuario)
+            }else if(usuario.address.includes(busq)){
+                usuariosFiltrados.push(usuario)
+            }else if(usuario.phone.includes(busq)){
+                usuariosFiltrados.push(usuario)
+            }
+        })
+        return usuariosFiltrados
+    }
+    console.log(usuariosFiltrados)
+    res.json(filtrarbusqueda(busqueda))
+})
+
 app.put('/api/users/:id', function (req, res) {
     const id = req.params.id;
-    console.log("el id es ", id);
+    //console.log("el id es ", id);
     const usuarioEditado = req.body;
-    console.log(req.body)
+    //console.log(req.body)
     usuarios.forEach(usuario => {
         if (usuario.id == id) {
             usuario.name = usuarioEditado.name;
