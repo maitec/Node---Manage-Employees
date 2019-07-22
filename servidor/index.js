@@ -42,6 +42,13 @@ app.get('/api/users', function (req, res) {
 
 app.post('/api/users', function (req,res) {
     const nuevoUsuario = req.body;
+    function validarMail(mail){
+        const regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(mail) ? false : true;
+    }
+    if(nuevoUsuario.name.length > 30 || isNaN(nuevoUsuario.phone) || validarMail(nuevoUsuario.email)){
+        return res.status(400)
+    }
     nuevoUsuario.id = ID++;
     usuarios.push(nuevoUsuario);
     res.json(nuevoUsuario)
