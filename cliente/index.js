@@ -49,15 +49,30 @@ fetch('http://localhost:3000/api/users')
         }
     })
 
-filtro.addEventListener('keypress', function (event){
-    if(event.keyCode === 13){
+filtro.addEventListener('keypress', function (event) {
+    if (event.keyCode === 13) {
         let textoBusqueda = filtro.value;
-        console.log(textoBusqueda)
+
         fetch(`http://localhost:3000/api/users?search=${textoBusqueda}`)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-        })
+            .then(res => res.json())
+            .then(data => {
+
+                tableRows = data.map(function (u) {
+                    return `<tr id="${u.id}">
+            <td><input type="checkbox"></td>
+            <td>${u.name}</td>
+            <td>${u.email}</td>
+            <td>${u.address}</td>
+            <td>${u.phone}</td>
+            <td>
+                <i class="material-icons edit" title="Edit" data-toggle="modal" data-target="#editEmployee" onclick=editar(${u.id})></i>
+                <i class="material-icons delete" title="Delete" data-toggle="modal" data-target="#deleteEmployee" onclick=eliminar(${u.id})></i>
+            </td>
+        </tr>`
+                });
+
+                document.querySelector('tbody').innerHTML = tableRows.join('');
+            })
     }
 })
 

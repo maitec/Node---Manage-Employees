@@ -17,7 +17,27 @@ const usuarios = [
 let ID = 9;
 
 app.get('/api/users', function (req, res) {
-    res.json(usuarios);
+    if(req.query.search){
+        let busqueda = req.query.search.toUpperCase();
+        let usuariosFiltrados = [];
+        function filtrarbusqueda (busq){
+            usuarios.forEach(usuario => {
+                if(usuario.name.toUpperCase().includes(busq)){
+                    usuariosFiltrados.push(usuario)
+                }else if(usuario.email.toUpperCase().includes(busq)){
+                    usuariosFiltrados.push(usuario)
+                }else if(usuario.address.toUpperCase().includes(busq)){
+                    usuariosFiltrados.push(usuario)
+                }else if(usuario.phone.toString().includes(busq)){
+                    usuariosFiltrados.push(usuario)
+                }
+            })
+            return usuariosFiltrados
+        }
+        res.json(filtrarbusqueda(busqueda))
+    }else{
+        res.json(usuarios);
+    }
 })
 
 app.post('/api/users', function (req,res) {
@@ -25,27 +45,6 @@ app.post('/api/users', function (req,res) {
     nuevoUsuario.id = ID++;
     usuarios.push(nuevoUsuario);
     res.json(nuevoUsuario)
-})
-
-app.get('/api/users', function(req, res){
-    let busqueda = req.query.search;
-    let usuariosFiltrados = [];
-    function filtrarbusqueda (busq){
-        usuarios.forEach(usuario => {
-            if(usuario.name.includes(busq)){
-                usuariosFiltrados.push(usuario)
-            }else if(usuario.email.includes(busq)){
-                usuariosFiltrados.push(usuario)
-            }else if(usuario.address.includes(busq)){
-                usuariosFiltrados.push(usuario)
-            }else if(usuario.phone.includes(busq)){
-                usuariosFiltrados.push(usuario)
-            }
-        })
-        return usuariosFiltrados
-    }
-    console.log(usuariosFiltrados)
-    res.json(filtrarbusqueda(busqueda))
 })
 
 app.put('/api/users/:id', function (req, res) {
