@@ -16,6 +16,11 @@ const usuarios = [
 
 let ID = 9;
 
+function validarMail(mail){
+    const regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(mail) ? false : true;
+}
+
 app.get('/api/users', function (req, res) {
     if(req.query.search){
         let busqueda = req.query.search.toUpperCase();
@@ -42,10 +47,6 @@ app.get('/api/users', function (req, res) {
 
 app.post('/api/users', function (req,res) {
     const nuevoUsuario = req.body;
-    function validarMail(mail){
-        const regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        return regex.test(mail) ? false : true;
-    }
     if(nuevoUsuario.name.length > 30 || isNaN(nuevoUsuario.phone) || validarMail(nuevoUsuario.email)){
         return res.status(400)
     }
@@ -56,9 +57,10 @@ app.post('/api/users', function (req,res) {
 
 app.put('/api/users/:id', function (req, res) {
     const id = req.params.id;
-    //console.log("el id es ", id);
     const usuarioEditado = req.body;
-    //console.log(req.body)
+    if(usuarioEditado.name.length > 30 || isNaN(usuarioEditado.phone) || validarMail(usuarioEditado.email)){
+        return res.status(400)
+    }
     usuarios.forEach(usuario => {
         if (usuario.id == id) {
             usuario.name = usuarioEditado.name;
